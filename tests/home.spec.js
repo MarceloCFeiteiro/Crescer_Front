@@ -26,4 +26,18 @@ test.describe('Testes Relacionados a Home', () => {
         await checkoutPage.validarModalPagamento('Pix');
         await homePage.validarHomeVisivel();
     });
+
+
+    test('Comprar Chapeu Estando Logado com PIX', async ({ authPage, checkoutPage, homePage, user }) => {
+        await homePage.clicarLogin();
+        await authPage.login(user.email, user.senha);
+        await homePage.adicionaChapeuNoCarrinhoPorNome('Chapéu Floppy');
+        await homePage.concluirCarrinho();
+        await checkoutPage.preencherDadosPessoais(user.nome, user.cpf, user.email, '(51) 99999-9999');
+        await checkoutPage.preencherEndereco(fakerPT_BR.location.buildingNumber(), fakerPT_BR.number.int({ min: 0, max: 9999 }), fakerPT_BR.location.city(), fakerPT_BR.location.zipCode('#####-###'), fakerPT_BR.location.city(), 'RS');
+        await checkoutPage.finalizarCompra('Pix');
+        await checkoutPage.validarModalPagamento('Pix');
+        await homePage.validarHomeVisivel();
+
+    });
 });

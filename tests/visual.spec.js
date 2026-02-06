@@ -4,7 +4,7 @@ import { expect } from '@playwright/test';
 
 test('Valida Visualmente a Página de Login', async ({ authPage }) => {
     // 1. Abre a página
-    await authPage.gotoAuthPage('https://example.com');
+    await authPage.gotoAuthPage();
 
     // 2. Espera carregar o conteúdo principal
     await authPage.validarElementosVisiveis();
